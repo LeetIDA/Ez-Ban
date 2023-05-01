@@ -1,5 +1,5 @@
-# Ez-Ban
-TikTok Report Spam Tool Made With Python
+
+# ⭐ Leave a Star For More Tools 
 
 # How To Use
 1. Edit Code At Line 25 (Update Proxy-list)
@@ -9,8 +9,9 @@ TikTok Report Spam Tool Made With Python
 5. Paste The Value
 
 # ScreenShots
-Copy The Value Like This
+**Copy The Value Like This ↷**
 ![RequsetURL](https://cdn.discordapp.com/attachments/994301673835081778/1102382856732426241/report.png)
 
 ![Tool](https://cdn.discordapp.com/attachments/994301673835081778/1102385424296583310/tool.png)
 ![Tool2](https://cdn.discordapp.com/attachments/994301673835081778/1102385977118441482/tool2.png)
+
