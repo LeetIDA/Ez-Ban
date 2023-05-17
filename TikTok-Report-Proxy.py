@@ -31,4 +31,7 @@ while True:
             print(Fore.RED + 'Something went wrong. It may not be working properly.')
             input('Press Enter to close the program')
             exit()
-            
+
+        # Add a delay between requests (e.g., 1 second)
+        time.sleep(1)
+
