@@ -64,43 +64,43 @@ class IDA
 
     def send_request
         headers = {
-        'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
-    }
-    response = HTTParty.get("https://www.tiktok.com/@#{@username}", headers: headers)
-    @server_log = response.body
-    response.body
-end
-
-def _to_json
-    begin
-        soup = Nokogiri::HTML(@server_log)
-        script = soup.at('#SIGI_STATE').content
-        data = script.split('},"UserModule":{"users":{')[1]
-        @data_json = data
-        return 1
-    rescue
-        puts '[X] Error: Username Not Found.'
-        exit
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 IDA'
+        }
+        @response = HTTParty.get("https://www.tiktok.com/@#{@username}", headers: headers)
+        @server_log = @response.body
     end
-end
-
-def get_user_id
-    begin
-        data = @data_json
-        data.split('"id":"')[1].split('",')[0]
-    rescue
-        'Unknown'
+    
+    def _to_json
+        begin
+            script_tag = Nokogiri::HTML(@response.body).at('script#__UNIVERSAL_DATA_FOR_REHYDRATION__')
+            script_text = script_tag.text.strip
+            @json_data = JSON.parse(script_text)['__DEFAULT_SCOPE__']['webapp.user-detail']['userInfo']
+        rescue StandardError
+            puts '[X] Error: Username Not Found.'
+            exit
+        end
     end
-end
-
-def secUid
-    begin
-        data = @data_json
-        data.split(',"secUid":"')[1].split('"')[0]
-    rescue
-        'Unknown'
+    
+    def get_user_id
+        begin
+            data = @json_data
+            data["user"]["id"]
+        rescue StandardError
+            'Unknown'
+        end
     end
-end
+    
+    def secUid
+        begin
+            data = @json_data
+            data["user"]["secUid"]
+        rescue StandardError
+            'Unknown'
+        end
+    end
+    
+    
+
 
 def generate_report_url
     base_url = 'https://www.tiktok.com/aweme/v2/aweme/feedback/?'
@@ -178,7 +178,7 @@ def output
                 res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https', open_timeout: 2, read_timeout: 2) do |http|
                     http.request(req)
                 end
-                puts "[#{current_time}]".colorize(:red) + " #{'Proxy: ' + proxy} Report Sent".colorize(:green)
+                puts "[#{current_time}]".colorize(:red) + " #{'Proxy: ' + proxy} Report Sent To #{@username}".colorize(:green)
             rescue => e
                 puts "Something went wrong: #{e}".colorize(:red)
                 puts 'Press Enter to close the program'.colorize(:red)
