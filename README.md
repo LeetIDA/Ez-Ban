@@ -47,6 +47,16 @@
 
 ##
 
+### Troubleshooting "403 Forbidden" Errors from TikTok API
+
+If you encounter a "403 Forbidden" error when using the script, it indicates that your request to TikTok was blocked. This can happen for several reasons, and here are steps you can take to resolve the issue:
+
+1. **Check Your IP Address**: Ensure your IP is not blacklisted by TikTok. Sometimes, TikTok may block IP addresses that exhibit suspicious behavior.
+2. **Use a Different IP or Proxy**: If your IP is blocked, try using a different IP address or a proxy. This can help bypass the block.
+3. **Wait and Retry**: If you suspect TikTok's rate limiting is causing the block, wait for some time before trying again. TikTok may temporarily block IPs that make too many requests in a short period.
+
+By following these steps, you can troubleshoot and potentially resolve the "403 Forbidden" error, allowing you to continue using the script without interruption.
+
 ### 📜 License & Warning
 
 - Education Propose Only !!
