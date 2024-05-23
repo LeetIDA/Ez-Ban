@@ -177,6 +177,9 @@ end
 def output
     report_url = generate_report_url
     tiktok_url = report_url
+    max_retries = 3
+    retries = 0
+    backoff = 1
 
     while true
         proxies = Net::HTTP.get(URI(@proxy_url)).split("\r\n")
@@ -192,6 +195,19 @@ def output
                     http.request(req)
                 end
                 puts "[#{current_time}]".colorize(:red) + " #{'Proxy: ' + proxy} Report Sent To #{@username}".colorize(:green)
+                retries = 0 # Reset retries after a successful request
+            rescue Net::OpenTimeout => e
+                puts "Attempt #{retries + 1}: Something went wrong: #{e}".colorize(:red)
+                if retries < max_retries
+                    retries += 1
+                    sleep(backoff)
+                    backoff *= 2
+                    redo
+                else
+                    puts 'Max retries reached. Moving to the next proxy.'.colorize(:red)
+                    retries = 0 # Reset retries for the next proxy
+                    backoff = 1 # Reset backoff for the next proxy
+                end
             rescue => e
                 puts "Something went wrong: #{e}".colorize(:red)
                 puts 'Press Enter to close the program'.colorize(:red)
