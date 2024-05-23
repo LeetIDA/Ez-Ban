@@ -67,7 +67,20 @@ class IDA
             'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 IDA'
         }
         @response = HTTParty.get("https://www.tiktok.com/@#{@username}", headers: headers)
-        @server_log = @response.body
+        if @response.code == 403
+            handle_forbidden_error
+        else
+            @server_log = @response.body
+        end
+    end
+
+    def handle_forbidden_error
+        puts "403 Forbidden Error: Your request to TikTok was blocked.".colorize(:red)
+        puts "Possible actions to resolve this issue:".colorize(:yellow)
+        puts "- Ensure your IP is not blacklisted by TikTok.".colorize(:light_blue)
+        puts "- Try using a different IP address or proxy.".colorize(:light_blue)
+        puts "- Wait and try again later if TikTok's rate limiting is causing the block.".colorize(:light_blue)
+        exit
     end
     
     def _to_json
