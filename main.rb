@@ -131,7 +131,62 @@ class IDA
     end
     
     def generate_report_url
-        # URL generation logic remains unchanged
+    base_url = 'https://www.tiktok.com/aweme/v2/aweme/feedback/?'
+
+    browser_name = ['Mozilla', 'Chrome', 'Safari', 'Firefox'].sample
+    browser_platform = ['Win32', 'Mac', 'Linux'].sample
+    browser_version = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) #{browser_name}/#{rand(80..120)}.0 Safari/537.36"
+    current_region = ['US', 'UK', 'CA', 'AU', 'IN', 'BR', 'FR', 'DE', 'IT', 'ES'].sample
+    device_id = rand(10**18..10**19).to_s
+    is_fullscreen = [true, false].sample.to_s
+    os = ['windows', 'mac', 'linux'].sample
+    priority_region = ['US', 'UK', 'CA', 'AU', 'IN', 'BR', 'FR', 'DE', 'IT', 'ES'].sample
+    region = ['US', 'UK', 'CA', 'AU', 'IN', 'BR', 'FR', 'DE', 'IT', 'ES'].sample
+    screen_height = rand(600..1080).to_s
+    screen_width = rand(800..1920).to_s
+    tz_name = ['America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney', 'Asia/Kolkata', 'America/Los_Angeles', 'Europe/Paris', 'Asia/Dubai', 'America/Sao_Paulo', 'Asia/Shanghai'].sample
+    webcast_language = ['en', 'es', 'fr', 'de', 'ja', 'pt', 'it', 'ru', 'ar', 'hi'].sample
+
+    params = {
+    aid: '1988',
+    app_language: 'en',
+    app_name: 'tiktok_web',
+    browser_language: 'en-US',
+    browser_name: browser_name,
+    browser_online: 'true',
+    browser_platform: browser_platform,
+    browser_version: browser_version,
+    channel: 'tiktok_web',
+    cookie_enabled: 'true',
+    current_region: current_region,
+    device_id: device_id,
+    device_platform: 'web_pc',
+    focus_state: 'true',
+    from_page: 'user',
+    history_len: '1',
+    is_fullscreen: is_fullscreen,
+    is_page_visible: 'true',
+    lang: 'en',
+    nickname: CGI.escape(@username),
+    object_id: get_user_id,
+    os: os,
+    priority_region: priority_region,
+    reason: '9010',
+    referer: 'https://www.tiktok.com/',
+    region: region,
+    report_type: 'user',
+    reporter_id: get_user_id,
+    root_referer: 'https://www.tiktok.com/',
+    screen_height: screen_height,
+    screen_width: screen_width,
+    secUid: secUid,
+    target: get_user_id,
+    tz_name: tz_name,
+    webcast_language: webcast_language
+}
+
+report_url = base_url + params.map { |k, v| "#{k}=#{v}" }.join('&')
+report_url
     end
 
     def output
