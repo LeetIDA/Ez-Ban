@@ -50,12 +50,24 @@ class IDA
             puts "Invalid choice. Exiting..."
             exit
         end
-        print '[?] Username: '.colorize(:light_blue)
-        @username = gets.chomp
-        @username.delete!('@') if @username[0] == '@' || @username.include?('@')
+        username_input
         @server_log = nil
         @data_json = nil
         admin
+    end
+
+    def username_input
+        valid_username = false
+        until valid_username
+            print '[?] Username: '.colorize(:light_blue)
+            @username = gets.chomp
+            if @username.empty?
+                puts "Username cannot be empty. Please enter a valid username."
+            else
+                @username.delete!('@') if @username[0] == '@' || @username.include?('@')
+                valid_username = true
+            end
+        end
     end
 
     def open_proxy_link
