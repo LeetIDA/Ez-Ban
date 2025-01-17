@@ -82,7 +82,15 @@ By following these steps, you can troubleshoot and potentially resolve the "403 
 - Education Propose Only !!
 - Licensed Under GNU License.
 
-##
+## Star History
+
+<a href="https://star-history.com/#LeetIDA/Ez-Ban&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=LeetIDA/Ez-Ban&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=LeetIDA/Ez-Ban&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=LeetIDA/Ez-Ban&type=Date" />
+ </picture>
+</a>
 
 <p align="center">
   <img src="https://badges.frapsoft.com/os/v3/open-source.svg?v=103" alt="Open Source">
