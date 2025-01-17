@@ -22,15 +22,7 @@ end
 required_gems = %w[cgi httparty json nokogiri colorize net-http-persistent]
 
 required_gems.each { |gem| require_gem(gem) }
-puts "
-████████╗██╗██╗  ██╗████████╗ ██████╗ ██╗  ██╗   ██████╗  █████╗ ███╗   ██╗
-╚══██╔══╝██║██║ ██╔╝╚══██╔══╝██╔═══██╗██║ ██╔╝   ██╔══██╗██╔══██╗████╗  ██║
-   ██║   ██║█████╔╝    ██║   ██║   ██║█████╔╝    ██████╔╝███████║██╔██╗ ██║
-   ██║   ██║██╔═██╗    ██║   ██║   ██║██╔═██╗    ██╔══██╗██╔══██║██║╚██╗██║
-   ██║   ██║██║  ██╗   ██║   ╚██████╔╝██║  ██╗██╗██████╔╝██║  ██║██║ ╚████║
-   ╚═╝   ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝
-                               GitHub: LeetIDA                                    
-".magenta
+
 
 class IDA
     def initialize
@@ -48,7 +40,7 @@ class IDA
             open_proxy_link
         else
             puts "Invalid choice. Exiting..."
-            exit
+            return
         end
         username_input
         @server_log = nil
@@ -94,7 +86,7 @@ class IDA
 
     def send_request
         headers = {
-            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 IDA'
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 IDA' # spell-check-disable-line
         }
         @response = HTTParty.get("https://www.tiktok.com/@#{@username}", headers: headers)
         if @response.code == 403
@@ -117,7 +109,7 @@ class IDA
         begin
             script_tag = Nokogiri::HTML(@response.body).at('script#__UNIVERSAL_DATA_FOR_REHYDRATION__')
             script_text = script_tag.text.strip
-            @json_data = JSON.parse(script_text)['__DEFAULT_SCOPE__']['webapp.user-detail']['userInfo']
+            @json_data = JSON.parse(script_text)['__DEFAULT_SCOPE__']['UserModule']['userInfo']
         rescue StandardError
             puts '[X] Error: Username Not Found.'
             exit
@@ -147,7 +139,7 @@ class IDA
 
     browser_name = ['Mozilla', 'Chrome', 'Safari', 'Firefox'].sample
     browser_platform = ['Win32', 'Mac', 'Linux'].sample
-    browser_version = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) #{browser_name}/#{rand(80..120)}.0 Safari/537.36"
+    browser_version = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) #{browser_name}/#{rand(80..120)}.0 Safari/537.36" # spell-check-disable-line
     current_region = ['US', 'UK', 'CA', 'AU', 'IN', 'BR', 'FR', 'DE', 'IT', 'ES'].sample
     device_id = rand(10**18..10**19).to_s
     is_fullscreen = [true, false].sample.to_s
@@ -156,19 +148,19 @@ class IDA
     region = ['US', 'UK', 'CA', 'AU', 'IN', 'BR', 'FR', 'DE', 'IT', 'ES'].sample
     screen_height = rand(600..1080).to_s
     screen_width = rand(800..1920).to_s
-    tz_name = ['America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney', 'Asia/Kolkata', 'America/Los_Angeles', 'Europe/Paris', 'Asia/Dubai', 'America/Sao_Paulo', 'Asia/Shanghai'].sample
+    tz_name = ['America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney', 'Asia/Kolkata', 'America/Los_Angeles', 'Europe/Paris', 'Asia/Dubai', 'America/Sao_Paulo', 'Asia/Shanghai'].sample # spell-check-disable-line
     webcast_language = ['en', 'es', 'fr', 'de', 'ja', 'pt', 'it', 'ru', 'ar', 'hi'].sample
 
     params = {
     aid: '1988',
     app_language: 'en',
-    app_name: 'tiktok_web',
+    app_name: 'tiktok_web', # spell-check-disable-line
     browser_language: 'en-US',
     browser_name: browser_name,
     browser_online: 'true',
     browser_platform: browser_platform,
     browser_version: browser_version,
-    channel: 'tiktok_web',
+    channel: 'tiktok_web', # spell-check-disable-line
     cookie_enabled: 'true',
     current_region: current_region,
     device_id: device_id,
@@ -184,11 +176,11 @@ class IDA
     os: os,
     priority_region: priority_region,
     reason: '9010',
-    referer: 'https://www.tiktok.com/',
+    referer: 'https://www.tiktok.com/', # spell-check-disable-line
     region: region,
     report_type: 'user',
     reporter_id: get_user_id,
-    root_referer: 'https://www.tiktok.com/',
+    root_referer: 'https://www.tiktok.com/', # spell-check-disable-line
     screen_height: screen_height,
     screen_width: screen_width,
     secUid: secUid,
@@ -203,12 +195,12 @@ report_url
 
     def output
         report_url = generate_report_url
-        tiktok_url = report_url
+        tiktok_url = report_url # spell-check-disable-line
         max_retries = 3
         retries = 0
         backoff = 1
         proxy_list = if @proxy_source
-                       File.readlines(@proxy_source).map(&:chomp)
+                       File.readlines(@proxy_source).map(&:chomp) # spell-check-disable-line
                      else
                        Net::HTTP.get(URI(@proxy_url)).split("\r\n")
                      end
@@ -217,7 +209,7 @@ report_url
             Thread.new do
                 begin
                     current_time = Time.now.strftime('%H:%M:%S')
-                    uri = URI(tiktok_url)
+                    uri = URI(tiktok_url) # spell-check-disable-line
                     req = Net::HTTP::Post.new(uri)
                     http_proxy = "http://#{proxy}"
                     req['proxy'] = http_proxy
