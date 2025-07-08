@@ -22,6 +22,14 @@ View the security scan results here:
    <img src="https://github.com/user-attachments/assets/1a0821c4-15d9-4b3e-b1e8-0dcb15045ac8" alt="Screenshot">
 </p>
 
+## ✅ TODO
+
+- [ ] Improve Speed   
+- [ ] Report Multiple accounts   
+- [ ] Auto Update  
+- [ ] Auto Fetch Proxies 
+- [ ] Choses Report Type  
+- [ ] Monitor account if banned, send alert to discord or telegram  
 
 ##
 
